@@ -1,6 +1,7 @@
 local icons = require("config.icons")
 
 local spec = {
+    enabled = false,
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter" },
     dependencies = {

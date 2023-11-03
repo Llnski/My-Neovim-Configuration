@@ -2,6 +2,7 @@ local Binder = require("config.Binder")
 local icons = require("config.icons")
 
 local spec = {
+  enabled = false,
     "neovim/nvim-lspconfig",
     name = "lspconfig",
     event = {
