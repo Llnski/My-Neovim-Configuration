@@ -1,6 +1,14 @@
 -- settings/servers.lua
 local lspconfig = require("lspconfig")
 
+local mason = require('mason')
+local masonlspconfig = require('masonlspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require('lspconfig').rust_analyzer.setup {
+  capabilities = capabilities,
+    -- other lspconfig configs
+}
+
 -- $ rustup component add rust-analyzer
 lspconfig.rust_analyzer.setup({
   capabilities = capabilities,

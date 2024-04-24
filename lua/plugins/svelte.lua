@@ -3,7 +3,8 @@ name = "svelte",
 dependencies = {"pangloss/vim-javascript",
 "othree/html5.vim"
 },
-lazy = true
+lazy = true,
+--ft = 'svelte'
 }
 
 function spec:config()

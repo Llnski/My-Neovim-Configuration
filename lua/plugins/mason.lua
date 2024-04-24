@@ -3,8 +3,7 @@ local icons = require("config.icons")
 local spec = {
     "williamboman/mason.nvim",
     name = "mason",
-    lazy = true,
-    priority = 10000,
+    lazy = false,
     cmd = {
         "Mason",
         "MasonInstall",
@@ -19,6 +18,7 @@ local spec = {
 
 function spec:config()
     local mason = require("mason")
+
     mason.setup({
         ui = {
             icons = {

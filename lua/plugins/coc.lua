@@ -1,6 +1,9 @@
 local spec = {
   'neoclide/coc.nvim',
-  lazy = false,
+  lazy = true,
+  enabled = true,
+  filetype = {'lua'}
+
 
 }
 function spec:config()
@@ -10,7 +13,7 @@ vim.opt.writebackup = false
 
 -- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 -- delays and poor user experience
-vim.opt.updatetime = 250
+vim.opt.updatetime = 300
 
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appeared/became resolved
@@ -29,13 +32,12 @@ end
 -- NOTE: Use command ':verbose imap <tab>' to make sure Tab is not mapped by
 -- other plugins before putting this into your config
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+keyset("i", "<Down>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<Down>" : coc#refresh()', opts)
+keyset("i", "<Up>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
 -- Make <CR> to accept selected completion item or notify coc.nvim to format
 -- <C-g>u breaks current undo, please make your own choice
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
 -- Use <t> to trigger snippets
 keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
 -- Use <c-space> to trigger completion
@@ -64,21 +66,20 @@ function _G.show_docs()
         vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
     end
 end
-keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
-
+keyset("n", "K", 'call CocActionAsync("showSignatureHelp")')
+keyset("n", "t", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
 vim.api.nvim_create_augroup("CocGroup", {})
 vim.api.nvim_create_autocmd("CursorHold", {
     group = "CocGroup",
-    command = "silent call CocActionAsync('highlight')",
+    command = "silent call CocActionAsync('highlight')", --could add something here to make stuff show todo
     desc = "Highlight symbol under cursor on CursorHold"
 })
 
 
 -- Symbol renaming
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
-
 
 -- Formatting selected code
 keyset("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
@@ -187,5 +188,10 @@ keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
 keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 -- Resume latest coc list
 keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
+
+keyset("n", "gd", "<Plug>(coc-definition)", opts)
+keyset("n", "gy", "<Plug>(coc-type-definition)", opts)
+keyset("n", "gi", "<Plug>(coc-implementation)", opts)
+keyset("n", "gr", "<Plug>(coc-references)", opts)
 end
 return spec

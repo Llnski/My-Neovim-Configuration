@@ -2,12 +2,16 @@ local Binder = require("config.Binder")
 local icons = require("config.icons")
 
 local spec = {
-  enabled = false,
+  enabled = true,
+  priority = 20000,
+  lazy = false,
     "neovim/nvim-lspconfig",
     name = "lspconfig",
     event = {
         "BufReadPre",
         "BufNewFile",
+    },
+    opts = {
     },
 }
 
@@ -61,19 +65,22 @@ function spec:config()
     vim.api.nvim_create_autocmd({ "LspAttach" }, {
         group = vim.api.nvim_create_augroup("config.plugins.lsp.attacher", {}),
         callback = function(args)
+            vim.bo[args.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+            local opts = {buffer = args.buf}
             local binder = Binder.new():with_modes({ "n" }):with_buffer(args.buf)
-            binder:bind("<leader>ih", vim.lsp.buf.hover)
-            binder:bind("<leader>id", vim.lsp.buf.definition, { reuse_win = true })
-            binder:bind("<leader>it", vim.lsp.buf.type_definition, {
+            binder:bind("t", vim.lsp.buf.hover)
+            binder:bind("gd", vim.lsp.buf.definition, { reuse_win = true })
+            binder:bind("gy", vim.lsp.buf.type_definition, {
                 reuse_win = true,
             })
-            binder:bind("<leader>ii", vim.lsp.buf.implementation)
+            binder:bind("gi", vim.lsp.buf.implementation)
             binder:bind("<leader>ir", vim.lsp.buf.references)
             binder:bind("<leader>ia", vim.lsp.buf.code_action)
             binder:bind("<leader>if", vim.lsp.buf.format, { async = true })
             binder:bind("<leader>ic", vim.lsp.buf.rename)
             binder:clone():with_modes({ "i", "s" }):bind("<c-space>", vim.lsp.buf.signature_help)
         end,
+
     })
 
     vim.api.nvim_create_autocmd({ "LspDetach" }, {
@@ -90,6 +97,13 @@ function spec:config()
             binder:unbind("<leader>ic")
         end,
     })
+
+    lspconfig.rust_analyzer.setup {
+      -- Server-specific settings. See `:help lspconfig-setup`
+      settings = {
+        ['rust-analyzer'] = {},
+      },
+    }
 end
 
 return spec

@@ -38,3 +38,7 @@ highlight @exception guifg=#D72828 guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight @function.builtin guifg=#BCC039 guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight @function.definition guifg=#86BFDA guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight string.escape guifg=#F97171 guibg=NONE guisp=NONE blend=NONE gui=NONE
+highlight CocFloating guifg=#FFC31F guibg=#101118
+highlight CocMenuSel guifg=#FFC31F guibg=#4C566A
+highlight CocInlayHint guifg=#BDC13A guibg=#102128
+
