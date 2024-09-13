@@ -2,9 +2,7 @@ local Binder = require("config.Binder")
 local icons = require("config.icons")
 
 local spec = {
-  enabled = true,
-  priority = 20000,
-  lazy = false,
+  enabled = false,
     "neovim/nvim-lspconfig",
     name = "lspconfig",
     event = {
@@ -38,8 +36,8 @@ function spec:init()
     vim.fn.sign_define("DiagnosticSignHint", { linehl = "DiagnosticLineHint" })
 
     local binder = Binder.new():with_modes({ "n" })
-    binder:bind("[d", vim.diagnostic.goto_prev, { float = false })
-    binder:bind("]d", vim.diagnostic.goto_next, { float = false })
+    binder:bind("[d", vim.diagnostic.goto_prev, { float = true})
+    binder:bind("]d", vim.diagnostic.goto_next, { float = true})
     binder:bind("<leader>d", vim.diagnostic.open_float)
 end
 

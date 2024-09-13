@@ -1,6 +1,7 @@
 local spec = {
 "Shougo/echodoc",
-"lazy = false"
+lazy = true,
+enabled = false
 
 }
 function spec:config()

@@ -9,7 +9,9 @@ opt.swapfile = false
 opt.undofile = true
 
 opt.timeout = false
-opt.updatetime = 400
+vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
+vim.opt.shortmess = vim.opt.shortmess + { c = true}
+vim.api.nvim_set_option('updatetime', 300)
 
 opt.termguicolors = true
 opt.confirm = false
@@ -18,7 +20,6 @@ opt.splitbelow = true
 opt.splitright = true
 opt.scrolloff = 2
 opt.sidescrolloff = 2
-opt.shortmess:append("aIF")
 
 opt.list = true
 opt.listchars = { tab = icons.layout.tab .. "  " }

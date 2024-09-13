@@ -41,4 +41,6 @@ highlight string.escape guifg=#F97171 guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight CocFloating guifg=#FFC31F guibg=#101118
 highlight CocMenuSel guifg=#FFC31F guibg=#4C566A
 highlight CocInlayHint guifg=#BDC13A guibg=#102128
+highlight LeapMatch guifg=#000000 guibg=#FF70A6
+highlight LeapPrimaryLabbel guifg=#000000 guibg=#FF70A6
 

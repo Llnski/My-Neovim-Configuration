@@ -1,4 +1,7 @@
 vim.o.shell = vim.fn.executable('pwsh') and 'pwsh' or 'powershell'
+
+vim.cmd([[autocmd BufNewFile,BufRead *.thy set filetype=isabelle]])
+--vim.cmd([[filetype-plugin-on]])
 vim.cmd([[nnoremap <SPACE> <Nop>]])
 vim.cmd([[nnoremap <t> <Nop>]])
 vim.cmd([[nnoremap <Up> <Nop>]])
@@ -24,7 +27,6 @@ local modules = {
 
 }
 
-
 for _, module in ipairs(modules) do
   require(module)
 end
@@ -49,5 +51,4 @@ vim.cmd([[autocmd BufNewFile,BufRead *.pl set syntax=prolog]])
 vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 vim.cmd([[highlight htmlBold gui=bold guifg=#FABD2F ctermfg=124]])
 vim.cmd([[highlight htmlItalic gui=italic guifg=#FFFFFF ctermfg=124]])
-vim.api.nvim_set_keymap("n", "<leader>n", ":ASToggle<CR>", {})
-
+vim.keymap.set('n', '<C-b>', ':Telescope buffers<CR>')

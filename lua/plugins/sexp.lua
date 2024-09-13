@@ -1,5 +1,6 @@
 return {
   'guns/vim-sexp',
+  enabled = false,
   dependencies = {
     "tpope/vim-repeat"
   },

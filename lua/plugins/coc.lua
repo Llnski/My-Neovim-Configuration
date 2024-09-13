@@ -1,8 +1,7 @@
 local spec = {
   'neoclide/coc.nvim',
-  lazy = true,
+  lazy = false,
   enabled = true,
-  filetype = {'lua'}
 
 
 }

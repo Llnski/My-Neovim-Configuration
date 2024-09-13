@@ -1,7 +1,17 @@
 local Binder = require("config.Binder")
 local icons = require("config.icons")
+local antiCocPlugins = {
+  'cmp',
+  'lspconfig',
+  'mason',
+  'masonlspconfig',
+}
+function IsabelleNameFunction (plugName)
+  return vim.bo.filetype == 'isabelle' and antiCocPlugins.contains(plugName)
+end
 
 local lazy_path = vim.fs.normalize(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
+
 if not vim.loop.fs_access(lazy_path, "R") then
     vim.fn.system({
         "git",
